@@ -71,7 +71,7 @@ public class Infix {
                 System.out.println("outputQ =  "+ outputQ);
             }
             // If the token is a left parenthesis, then push it onto the stack
-            if (token.equals("(")) {
+            if (token.equals('(')) {
                 System.out.println("Token = ( . Push onto stack.");
                 stack.push(token);
                 System.out.println("inputQ = "+ inputQ);
@@ -79,7 +79,7 @@ public class Infix {
                 System.out.println("outputQ =  "+ outputQ);
             }
             // If the token is a right paranthesis
-            if (token.equals(")")) {
+            if (token.equals(')')) {
                 System.out.println("Token = ) .");
                 // Until the token at the top of the stack is a left parenthesis
                 // pop operators off the stack onto the output queue
