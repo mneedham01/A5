@@ -92,7 +92,7 @@ public class Infix {
                     System.out.println("in the while loop. stack = " +stack);
                     // pop operators off the stack onto the output queue
                     System.out.println("peekFirst is an operator. Push onto outputQ");
-                    outputQ.push(stack.pop());
+                    outputQ.addLast(stack.pop());
                     System.out.println("Popped off. New stack = "+ stack);
                     System.out.println("New outputQ = "+ outputQ);
                 }
@@ -114,7 +114,7 @@ public class Infix {
             }
             if (isOperator(stack.getFirst())) {
                 System.out.println("if isOperator -> push onto outputQ");
-                outputQ.push(stack.pop());
+                outputQ.addLast(stack.pop());
                 System.out.println("inputQ = "+ inputQ);
                 System.out.println("stack =  "+ stack);
                 System.out.println("outputQ =  "+ outputQ);
