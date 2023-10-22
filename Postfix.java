@@ -36,7 +36,6 @@ public class Postfix {
     }
 
     public static void main(String[] args) {
-
         ArrayDeque <Object> queue = Tokenizer.readTokens(args[0]);
         Postfix fix = new Postfix();
         System.out.println("Answer = " + fix.compute(queue));

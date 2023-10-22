@@ -134,6 +134,6 @@ public class Infix {
         System.out.println("Postfix version= " + postfix);
         // solve with postfix
         Postfix post = new Postfix();
-        System.out.println("Answer = " + post.compute(queue));
+        System.out.println("Answer = " + post.compute(postfix));
     }
 }
