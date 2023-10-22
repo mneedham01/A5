@@ -22,6 +22,9 @@ public class Infix {
 
     /** @return if Object is an operator */
     public boolean isOperator(Object token) {
+        if (token == null) {
+            return false;
+        }
         return token.equals('+') || token.equals('-') || token.equals('*') || token.equals('/');
     }
 
@@ -44,7 +47,7 @@ public class Infix {
             // If the token is a number, then add it to the output queue
             if (token instanceof Double) {
                 System.out.println("Token is instance of double.");
-                outputQ.push(token);
+                outputQ.addLast(token);
                 System.out.println("Pushed "+ token+ " onto outputQ.");
                 System.out.println("inputQ = "+ inputQ);
                 System.out.println("stack =  "+ stack);
@@ -55,9 +58,9 @@ public class Infix {
                 System.out.println("Token is an operator.");
                 // while there is an operator token at the top of the stack (the "stack operator")
                 // and the stack operator has greater precedence than the queue operator
-                while (stack.size() > 0 && isOperator(stack.getFirst()) && hasGreaterPrec(stack.pop(), token)) {
+                while (isOperator(stack.peekFirst()) && hasGreaterPrec(stack.peekFirst(), token)) {
                     System.out.println("There is an operator on the top of the stack and the stack operator has greater precedence.");
-                    outputQ.push(stack.pop());
+                    outputQ.addLast(stack.pop());
                     System.out.println("Pushed operator onto outputQ.");
                     System.out.println("inputQ = "+ inputQ);
                     System.out.println("stack =  "+ stack);
@@ -81,21 +84,20 @@ public class Infix {
             // If the token is a right paranthesis
             if (token.equals(')')) {
                 System.out.println("Token = ) .");
-                boolean foundLeft = false;
                 // Until the token at the top of the stack is a left parenthesis
-                while (stack.size() != 0 || foundLeft) {
-                    if (stack.getFirst().equals(')')) {
-                        foundLeft = true;
-                        // pop parantheses off
-                        stack.pop();
-                    } else {
-                        // pop operators off the stack onto the output queue
-                        outputQ.push(stack.pop());
+                while (! stack.peekFirst().equals('(')) {
+                    if (stack.size() == 0) {
+                        throw new RuntimeException("Mismatched parantheses.");
                     }
+                    System.out.println("in the while loop. stack = " +stack);
+                    // pop operators off the stack onto the output queue
+                    System.out.println("peekFirst is an operator. Push onto outputQ");
+                    outputQ.push(stack.pop());
+                    System.out.println("Popped off. New stack = "+ stack);
+                    System.out.println("New outputQ = "+ outputQ);
                 }
-                if (! foundLeft) {
-                    throw new RuntimeException("Mismatched parantheses.");
-                }
+                System.out.println("Found left paranthesis. Now popping off of stack.");
+                stack.pop();
                 System.out.println("inputQ = "+ inputQ);
                 System.out.println("stack =  "+ stack);
                 System.out.println("outputQ =  "+ outputQ);
