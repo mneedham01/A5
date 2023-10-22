@@ -81,26 +81,21 @@ public class Infix {
             // If the token is a right paranthesis
             if (token.equals(')')) {
                 System.out.println("Token = ) .");
+                boolean foundLeft = false;
                 // Until the token at the top of the stack is a left parenthesis
-                // pop operators off the stack onto the output queue
-                if (stack.size() == 0) {
+                while (stack.size() != 0 || foundLeft) {
+                    if (stack.getFirst().equals(')')) {
+                        foundLeft = true;
+                        // pop parantheses off
+                        stack.pop();
+                    } else {
+                        // pop operators off the stack onto the output queue
+                        outputQ.push(stack.pop());
+                    }
+                }
+                if (! foundLeft) {
                     throw new RuntimeException("Mismatched parantheses.");
                 }
-                while (! stack.pop().equals("(")) {
-                    System.out.println("Stack.pop() is not right paranthesis.");
-                    // If the stack runs out without finding a left parenthesis, then there are mismatched parentheses
-                    if (stack.size() == 0) {
-                        throw new RuntimeException("Mismatched parantheses.");
-                    }
-                    outputQ.push(stack.pop());
-                    System.out.println("Pushed onto outputQ.");
-                    System.out.println("inputQ = "+ inputQ);
-                    System.out.println("stack =  "+ stack);
-                    System.out.println("outputQ =  "+ outputQ);
-                }
-                // pop left parantheses off
-                System.out.println("Pop left parantheses off.");
-                stack.pop();
                 System.out.println("inputQ = "+ inputQ);
                 System.out.println("stack =  "+ stack);
                 System.out.println("outputQ =  "+ outputQ);
