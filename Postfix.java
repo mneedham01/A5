@@ -27,6 +27,9 @@ public class Postfix {
                 if (obj.equals('/')) {
                     stack.push(num1 / num2);
                 }
+                if (obj.equals('^')) {
+                    stack.push(Math.pow(num2, num1));
+                }
             }
         }
         if (stack.size() != 1) {
