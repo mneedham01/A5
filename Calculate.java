@@ -10,6 +10,9 @@ public class Calculate {
         if (obj.equals('*') || obj.equals('/')) {
             return 1;
         }
+        if (obj.equals('^')) {
+            return 2;
+        }
         throw new RuntimeException("Invalid operator.");
     }
 
