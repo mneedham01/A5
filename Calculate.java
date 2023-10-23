@@ -28,7 +28,7 @@ public class Calculate {
         if (token == null) {
             return false;
         }
-        return token.equals('+') || token.equals('-') || token.equals('*') || token.equals('/');
+        return token.equals('+') || token.equals('-') || token.equals('*') || token.equals('/') || token.equals('^'));
     }
 
 
@@ -93,6 +93,7 @@ public class Calculate {
         // turn into postfix
         Calculate infix = new Calculate();
         ArrayDeque <Object> postfix = infix.toPostfix(queue);
+        System.out.println("postfix="+postfix);
         // solve with postfix
         Postfix post = new Postfix();
         System.out.println("Answer = " + post.compute(postfix));
